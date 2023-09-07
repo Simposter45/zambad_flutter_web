@@ -1,5 +1,6 @@
-import 'package:first_proj/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 const poppinsFontFamily = 'Sans-serif';
 const latoFontFamily = 'Lato';

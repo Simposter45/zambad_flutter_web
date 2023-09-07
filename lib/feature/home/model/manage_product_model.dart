@@ -1,12 +1,4 @@
 class ManageProductModel {
-  String title;
-  String desc;
-  String netWeight;
-  String grossWeight;
-  String designId;
-  String category;
-  String image;
-
   ManageProductModel({
     required this.title,
     required this.desc,
@@ -16,6 +8,13 @@ class ManageProductModel {
     required this.category,
     required this.image,
   });
+  String title;
+  String desc;
+  String netWeight;
+  String grossWeight;
+  String designId;
+  String category;
+  String image;
 }
 
 List<ManageProductModel> getProducts() {

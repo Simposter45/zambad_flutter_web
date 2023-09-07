@@ -1,10 +1,11 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
-import 'package:first_proj/feature/_global/widgets/action_button.dart';
-import 'package:first_proj/feature/_global/widgets/appbar_widget.dart';
-import 'package:first_proj/feature/home/model/latest_customer_model.dart';
-import 'package:first_proj/feature/home/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/styles.dart';
+import '../../../_global/widgets/action_button.dart';
+import '../../../_global/widgets/appbar_widget.dart';
+import '../../model/latest_customer_model.dart';
+import '../../widgets/header_widget.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class Dashboard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10),
                       child: Text(
                         'Latest Orders',
                         style: AppTextStyles.nunitoSansBold,

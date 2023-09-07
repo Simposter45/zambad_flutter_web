@@ -1,14 +1,14 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
-import 'package:first_proj/feature/login_page/screens/check_mail_page.dart';
-import 'package:first_proj/feature/login_page/widgets/login_header.dart';
-import 'package:first_proj/providers/auth_provider.dart';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
+import '../../../providers/auth_provider.dart';
+import '../widgets/login_header.dart';
+import 'check_mail_page.dart';
+
 class ForgotPasswordScreen extends StatefulWidget {
-  ForgotPasswordScreen({Key? key}) : super(key: key);
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
@@ -33,14 +33,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     final AuthProvider authProvider = AuthProvider();
 
     return Scaffold(

@@ -1,10 +1,10 @@
-import 'package:first_proj/core/constants/colors.dart';
-
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/colors.dart';
+
 class CheckMailPage extends StatelessWidget {
+  const CheckMailPage({required this.email, Key? key}) : super(key: key);
   final String email;
-  const CheckMailPage({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

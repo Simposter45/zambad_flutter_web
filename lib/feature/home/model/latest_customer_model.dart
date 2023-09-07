@@ -1,10 +1,4 @@
 class LatestCustomerModel {
-  String orderId;
-  String date;
-  String pos;
-  String customerName;
-  Function action;
-
   LatestCustomerModel({
     required this.orderId,
     required this.date,
@@ -12,10 +6,15 @@ class LatestCustomerModel {
     required this.customerName,
     required this.action,
   });
+  String orderId;
+  String date;
+  String pos;
+  String customerName;
+  Function action;
 }
 
 List<LatestCustomerModel> getList() {
-  List<LatestCustomerModel> _latestCustomers = [
+  final List<LatestCustomerModel> latestCustomers = [
     LatestCustomerModel(
         orderId: '0L6l50xNLnD6AhjrgKnX',
         date: '2023-08-31',
@@ -132,5 +131,5 @@ List<LatestCustomerModel> getList() {
         action: () {}),
   ];
 
-  return _latestCustomers;
+  return latestCustomers;
 }

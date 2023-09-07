@@ -1,5 +1,6 @@
-import 'package:first_proj/core/constants/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/constants/styles.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({

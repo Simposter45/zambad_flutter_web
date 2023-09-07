@@ -1,8 +1,8 @@
-import 'package:first_proj/core/utils/responsive.dart';
-import 'package:first_proj/feature/home/screens/desktop_view.dart';
-import 'package:first_proj/feature/home/screens/mobile_view.dart';
-
 import 'package:flutter/material.dart';
+
+import '../../../core/utils/responsive.dart';
+import 'desktop_view.dart';
+import 'mobile_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     if (Responsive.isMobile(context)) {
       return MobileView();
     } else {
-      return DesktopView();
+      return const DesktopView();
     }
   }
 }

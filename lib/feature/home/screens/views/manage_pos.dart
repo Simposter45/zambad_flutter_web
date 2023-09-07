@@ -1,6 +1,7 @@
-import 'package:first_proj/feature/_global/widgets/action_button.dart';
-import 'package:first_proj/feature/_global/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../_global/widgets/action_button.dart';
+import '../../../_global/widgets/appbar_widget.dart';
 
 class ManagePos extends StatelessWidget {
   const ManagePos({Key? key}) : super(key: key);

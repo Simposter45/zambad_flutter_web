@@ -1,11 +1,4 @@
 class ManageOrders {
-  String customerName;
-  String contactPerson;
-  String salesPerson;
-  String pos;
-  String orderID;
-  String date;
-
   ManageOrders({
     required this.customerName,
     required this.contactPerson,
@@ -14,6 +7,12 @@ class ManageOrders {
     required this.orderID,
     required this.date,
   });
+  String customerName;
+  String contactPerson;
+  String salesPerson;
+  String pos;
+  String orderID;
+  String date;
 }
 
 List<ManageOrders> getOrders() {
