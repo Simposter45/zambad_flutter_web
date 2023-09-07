@@ -1,5 +1,5 @@
-class ManageOrders {
-  ManageOrders({
+class ManageOrderModel {
+  ManageOrderModel({
     required this.customerName,
     required this.contactPerson,
     required this.salesPerson,
@@ -15,79 +15,79 @@ class ManageOrders {
   String date;
 }
 
-List<ManageOrders> getOrders() {
-  final List<ManageOrders> list = [
-    ManageOrders(
+List<ManageOrderModel> getOrders() {
+  final List<ManageOrderModel> list = [
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',
         pos: 'POS30',
         orderID: 'EjhVTHQH05gGmLy5FUlR',
         date: '06/09/2023'),
-    ManageOrders(
+    ManageOrderModel(
         customerName: 'test',
         contactPerson: 'test',
         salesPerson: 'admin',

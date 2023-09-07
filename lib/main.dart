@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'feature/login_page/screens/login_screen.dart';
+import 'feature/home/screens/home_screen.dart';
 import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
 
@@ -29,7 +30,7 @@ class DemoApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home: HomeScreen(),
       ),
     );
   }

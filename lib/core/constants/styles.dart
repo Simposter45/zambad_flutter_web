@@ -29,12 +29,13 @@ class AppTextStyles {
     fontFamily: nunitoSansFamily,
     fontSize: 20,
     color: Colors.black,
+    fontWeight: FontWeight.w100,
   );
   static const TextStyle nunitoSansBold = TextStyle(
     fontFamily: nunitoSansFamily,
     fontSize: 20,
     color: Colors.black,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
   );
   static const TextStyle sairaNormal = TextStyle(
     fontFamily: sairaFamily,
