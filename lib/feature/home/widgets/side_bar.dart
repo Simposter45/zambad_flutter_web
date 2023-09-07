@@ -1,10 +1,10 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/utils/responsive.dart';
-import 'package:first_proj/feature/home/store/navigation_store.dart';
-import 'package:first_proj/providers/auth_provider.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../../../core/constants/colors.dart';
+import '../../../core/utils/responsive.dart';
+import '../../../providers/auth_provider.dart';
+import '../store/navigation_store.dart';
 
 final navigationStore = NavigationStore();
 
@@ -24,7 +24,7 @@ class SideBar extends StatelessWidget {
           children: [
             // const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Image.asset('assets/png/login-page-icon.png'),
             ),
 
@@ -79,11 +79,11 @@ class SideBar extends StatelessWidget {
 
 class _SideBarTile extends StatelessWidget {
   const _SideBarTile({
-    Key? key,
     required this.iconData,
     required this.title,
     required this.store,
     required this.screenIndex,
+    Key? key,
   }) : super(key: key);
 
   final IconData iconData;
@@ -116,7 +116,7 @@ class _SideBarTile extends StatelessWidget {
           }
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             color: isHovered || isSelected ? AppColors.deepGold : Colors.white,
           ),
@@ -126,19 +126,19 @@ class _SideBarTile extends StatelessWidget {
                 iconData,
                 color: isHovered || isSelected ? Colors.white : Colors.black,
               ),
-              const SizedBox(width: 20.0),
+              const SizedBox(width: 20),
               Text(
                 title,
                 style: TextStyle(
                   color: isHovered || isSelected ? Colors.white : Colors.black,
-                  fontSize: 18.0,
+                  fontSize: 18,
                 ),
               ),
               Text(
                 store.currentIndex.toString(),
                 style: TextStyle(
                   color: isHovered || isSelected ? Colors.white : Colors.black,
-                  fontSize: 18.0,
+                  fontSize: 18,
                 ),
               ),
             ],

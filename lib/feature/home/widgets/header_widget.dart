@@ -1,13 +1,14 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
-    Key? key,
     required this.text,
     required this.amount,
     required this.icon,
+    Key? key,
   }) : super(key: key);
 
   final String text;

@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
+  // ignore: sort_constructors_first
+
+  const Responsive({
+    // ignore: always_put_required_named_parameters_first
+
+    required this.mobile, // ignore: always_put_required_named_parameters_first
+
+    required this.desktop,
+    Key? key,
+    this.tablet,
+  }) : super(key: key);
   final Widget mobile;
 
   final Widget? tablet;
 
   final Widget desktop;
-
-  // ignore: sort_constructors_first
-
-  const Responsive({
-    Key? key,
-
-    // ignore: always_put_required_named_parameters_first
-
-    required this.mobile,
-    this.tablet,
-
-    // ignore: always_put_required_named_parameters_first
-
-    required this.desktop,
-  }) : super(key: key);
 
   // This isMobile, isTablet, isDesktop helep us later
 

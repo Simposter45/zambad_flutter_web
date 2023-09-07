@@ -1,11 +1,12 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
-import 'package:first_proj/core/helper/name_helper.dart';
-import 'package:first_proj/feature/login_page/screens/forgot_password_screen.dart';
-import 'package:first_proj/feature/login_page/widgets/login_header.dart';
-import 'package:first_proj/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
+import '../../../core/helper/name_helper.dart';
+import '../../../providers/auth_provider.dart';
+import '../widgets/login_header.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   : Icons.visibility_off_rounded,
                               size: 20,
                             ),
-                            onPressed: () => showPass(),
+                            onPressed: showPass,
                           ),
                           hintText: 'Enter Password',
                           enabledBorder: const OutlineInputBorder(
@@ -126,7 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordScreen()),
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen()),
                             );
                           },
                           child: const Text('Forgot password?',
@@ -145,11 +147,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async {
                             if (emailController.text.isEmpty ||
                                 passwordController.text.isEmpty) {
-                              showToast('Email and password are required');
+                              await showToast(
+                                  'Email and password are required');
                             } else if (!isValidEmail(emailController.text)) {
-                              showToast('Please enter a valid email address');
+                              await showToast(
+                                  'Please enter a valid email address');
                             } else if (passwordController.text.length < 8) {
-                              showToast(
+                              await showToast(
                                   'Password must be at least 8 characters long');
                             } else {
                               await authProvider.logIn(

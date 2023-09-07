@@ -1,7 +1,8 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
 
 // ignore: must_be_immutable
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {

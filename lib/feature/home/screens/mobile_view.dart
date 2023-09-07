@@ -1,17 +1,18 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
-import 'package:first_proj/feature/_global/widgets/action_button.dart';
-import 'package:first_proj/feature/_global/widgets/appbar_widget.dart';
-import 'package:first_proj/feature/home/model/latest_customer_model.dart';
-import 'package:first_proj/feature/home/screens/views/dashboard.dart';
-import 'package:first_proj/feature/home/screens/views/manage_categories.dart';
-import 'package:first_proj/feature/home/screens/views/manage_orders.dart';
-import 'package:first_proj/feature/home/screens/views/manage_pos.dart';
-import 'package:first_proj/feature/home/screens/views/manage_products.dart';
-import 'package:first_proj/feature/home/screens/views/manage_users.dart';
-import 'package:first_proj/feature/home/widgets/header_widget.dart';
-import 'package:first_proj/feature/home/widgets/side_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
+import '../../_global/widgets/action_button.dart';
+import '../../_global/widgets/appbar_widget.dart';
+import '../model/latest_customer_model.dart';
+import '../widgets/header_widget.dart';
+import '../widgets/side_bar.dart';
+import 'views/dashboard.dart';
+import 'views/manage_categories.dart';
+import 'views/manage_orders.dart';
+import 'views/manage_pos.dart';
+import 'views/manage_products.dart';
+import 'views/manage_users.dart';
 
 class MobileView extends StatelessWidget {
   MobileView({Key? key}) : super(key: key);
@@ -20,13 +21,13 @@ class MobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<LatestCustomerModel> orderList = getList();
-    var views = [
+    final views = [
       Dashboard(),
       ManageProducts(),
-      ManageOrders(),
-      ManagePos(),
-      ManageCategories(),
-      ManageUsers(),
+      const ManageOrders(),
+      const ManagePos(),
+      const ManageCategories(),
+      const ManageUsers(),
     ];
 
     return Scaffold(
@@ -55,7 +56,6 @@ class MobileView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
                     primary: false,
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +103,7 @@ class MobileView extends StatelessWidget {
                         style: AppTextStyles.sairaLightGrey),
                   )
                 else
-                  Center(
+                  const Center(
                     child: Text('List W'),
                   )
               ]),

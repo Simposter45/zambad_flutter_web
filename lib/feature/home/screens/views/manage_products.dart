@@ -1,10 +1,11 @@
-import 'package:first_proj/core/constants/colors.dart';
-import 'package:first_proj/core/constants/styles.dart';
-import 'package:first_proj/core/utils/responsive.dart';
-import 'package:first_proj/feature/_global/widgets/appbar_widget.dart';
-import 'package:first_proj/feature/home/model/manage_product_model.dart';
-import 'package:first_proj/feature/_global/widgets/action_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/styles.dart';
+import '../../../../core/utils/responsive.dart';
+import '../../../_global/widgets/action_button.dart';
+import '../../../_global/widgets/appbar_widget.dart';
+import '../../model/manage_product_model.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class ManageProducts extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -84,7 +85,7 @@ class ManageProducts extends StatelessWidget {
           const SizedBox(height: 50),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 50,
@@ -107,8 +108,8 @@ class ManageProducts extends StatelessWidget {
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key? key,
     required this.productModel,
+    Key? key,
   }) : super(key: key);
 
   final ManageProductModel productModel;
@@ -132,7 +133,7 @@ class ProductCard extends StatelessWidget {
           ),
           const Divider(color: AppColors.deepGold),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
