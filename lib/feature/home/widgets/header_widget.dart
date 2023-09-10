@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/styles.dart';
+import '../../../core/utils/responsive.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -21,7 +22,9 @@ class HeaderWidget extends StatelessWidget {
       alignment: Alignment.centerRight,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.2,
+          width: Responsive.isMobile(context)
+              ? MediaQuery.of(context).size.width * 0.9
+              : MediaQuery.of(context).size.width * 0.20,
           height: 118,
           constraints: const BoxConstraints(
             minWidth: 258,
@@ -35,7 +38,9 @@ class HeaderWidget extends StatelessWidget {
           ], color: AppColors.deepGold, borderRadius: BorderRadius.circular(7)),
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: Responsive.isMobile(context)
+              ? MediaQuery.of(context).size.width * 0.89
+              : MediaQuery.of(context).size.width * 0.19,
           height: 118,
           constraints: const BoxConstraints(
             minWidth: 250,
@@ -44,34 +49,37 @@ class HeaderWidget extends StatelessWidget {
               border: Border.all(color: AppColors.deepGold),
               color: Colors.white,
               borderRadius: BorderRadius.circular(7)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundColor: AppColors.lightGold,
-                child: Icon(
-                  icon,
-                  color: AppColors.deepGold,
-                ),
-              ),
-              const SizedBox(width: 20),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style:
-                        AppTextStyles.nunitoSansNormal.copyWith(fontSize: 16),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: AppColors.lightGold,
+                  child: Icon(
+                    icon,
+                    color: AppColors.deepGold,
                   ),
-                  Text(
-                    amount.toString(),
-                    style: AppTextStyles.nunitoSansBold.copyWith(fontSize: 24),
-                  )
-                ],
-              )
-            ],
+                ),
+                const SizedBox(width: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      text,
+                      textAlign: TextAlign.center,
+                      style:
+                          AppTextStyles.nunitoSansNormal.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      amount.toString(),
+                      style:
+                          AppTextStyles.nunitoSansBold.copyWith(fontSize: 24),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ],

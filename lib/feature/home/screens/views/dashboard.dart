@@ -2,26 +2,41 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/styles.dart';
+import '../../../../core/utils/responsive.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
 import '../../model/latest_customer_model.dart';
 import '../../widgets/header_widget.dart';
+import '../../widgets/side_bar.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<LatestCustomerModel> orderList = getList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBarWidget(title: 'Dashboard', widget: const SizedBox(), actions: [
-        ActionButton(
-          icon: Icons.refresh,
-          title: 'Refresh',
-          action: () {},
-        )
-      ]),
+      key: _scaffoldKey,
+      appBar: AppBarWidget(
+        title: 'Dashboard',
+        widget: Responsive.isTablet(context)
+            ? IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+              )
+            : const SizedBox(),
+        actions: [
+          ActionButton(
+            icon: Icons.refresh,
+            title: 'Refresh',
+            action: () {},
+          )
+        ],
+      ),
+      drawer: Responsive.isTablet(context) ? const SideBar() : null,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -33,7 +48,6 @@ class Dashboard extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   primary: false,
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const HeaderWidget(
                         text: 'Total Number of Orders',
@@ -138,7 +152,10 @@ class Dashboard extends StatelessWidget {
                                     child: Text(model.customerName)),
                                 Container(
                                     alignment: Alignment.center,
-                                    child: const Icon(Icons.info)),
+                                    child: IconButton(
+                                        splashRadius: 10,
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.info))),
                               ]),
                             ],
                           );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../store/navigation_store.dart';
 import '../widgets/side_bar.dart';
@@ -22,32 +23,36 @@ class DesktopView extends StatelessWidget {
       ManageProducts(),
       ManageOrders(),
       ManagePos(),
-      const ManageCategories(),
-      const ManageUsers(),
+      ManageCategories(),
+      ManageUsers(),
     ];
 
-    return Scaffold(
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 300,
-            alignment: Alignment.topCenter,
-            child: const SideBar(),
-          ),
-          Expanded(
-            child: Observer(
-              builder: (context) {
-                final index = navigationStore.currentIndex;
-                if (index == 0) {
-                  return views[0];
-                } else {
-                  return views[1];
-                }
-              },
+    return MultiProvider(
+      providers: [Provider(create: (_) => NavigationStore())],
+      child: Scaffold(
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 300,
+              alignment: Alignment.topCenter,
+              child: const SideBar(),
             ),
-          )
-        ],
+            Expanded(
+              child: Observer(
+                builder: (context) {
+                  // print(navigationStore.currentIndex);
+                  final index = navigationStore.currentIndex;
+                  if (index == 0) {
+                    return views[1];
+                  } else {
+                    return views[1];
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import '../../../../core/utils/responsive.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
 import '../../model/manage_product_model.dart';
+import '../../widgets/side_bar.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class ManageProducts extends StatelessWidget {
     return Scaffold(
       appBar: AppBarWidget(
         title: 'Manage Products',
+        // widget: const SideBar(),
         actions: [
           ActionButton(
             title: 'Generate Excel',
@@ -91,7 +93,11 @@ class ManageProducts extends StatelessWidget {
                     crossAxisSpacing: 50,
                     mainAxisSpacing: 50,
                     childAspectRatio: .8,
-                    crossAxisCount: Responsive.isDesktop(context) ? 3 : 2,
+                    crossAxisCount: Responsive.isMobile(context)
+                        ? 1
+                        : Responsive.isTablet(context)
+                            ? 2
+                            : 3,
                   ),
                   itemCount: productList.length,
                   itemBuilder: (_, index) {
