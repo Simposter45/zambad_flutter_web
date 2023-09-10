@@ -13,60 +13,57 @@ class ManageOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 300,
-      child: Scaffold(
-        appBar: AppBarWidget(
-          title: 'Manage Orders',
-          actions: [
-            ActionButton(
-              title: 'Generate Excel',
-              action: () {},
-            ),
-            ActionButton(
-              icon: Icons.add,
-              title: ' Add Product',
-              action: () {},
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const SizedBox(height: 40),
-              SizedBox(
-                width: double.infinity,
-                child: SearchBar(
-                  controller: textController,
-                  leading: const Icon(Icons.search, size: 16),
-                  hintText: 'Search by any Products name',
-                  hintStyle: MaterialStatePropertyAll(
-                    AppTextStyles.sairaLightGrey.copyWith(fontSize: 14),
-                  ),
-                  elevation: const MaterialStatePropertyAll(0),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(AppColors.grey6),
-                  shape: const MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(7)),
-                    ),
+    return Scaffold(
+      appBar: AppBarWidget(
+        title: 'Manage Orders',
+        actions: [
+          ActionButton(
+            title: 'Generate Excel',
+            action: () {},
+          ),
+          ActionButton(
+            icon: Icons.add,
+            title: ' Add Product',
+            action: () {},
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            SizedBox(
+              width: double.infinity,
+              child: SearchBar(
+                controller: textController,
+                leading: const Icon(Icons.search, size: 16),
+                hintText: 'Search by any Products name',
+                hintStyle: MaterialStatePropertyAll(
+                  AppTextStyles.sairaLightGrey.copyWith(fontSize: 14),
+                ),
+                elevation: const MaterialStatePropertyAll(0),
+                backgroundColor:
+                    const MaterialStatePropertyAll(AppColors.grey6),
+                shape: const MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7)),
                   ),
                 ),
               ),
-              const SizedBox(height: 50),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: orderList.length,
-                    itemBuilder: (context, index) {
-                      final orderItem = orderList[index];
-                      return InkWell(
-                          onHover: (value) {},
-                          child: OrderCard(orderItem: orderItem));
-                    }),
-              )
-            ],
-          ),
+            ),
+            const SizedBox(height: 50),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: orderList.length,
+                  itemBuilder: (context, index) {
+                    final orderItem = orderList[index];
+                    return InkWell(
+                        onHover: (value) {},
+                        child: OrderCard(orderItem: orderItem));
+                  }),
+            )
+          ],
         ),
       ),
     );

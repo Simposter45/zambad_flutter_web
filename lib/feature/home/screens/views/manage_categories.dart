@@ -13,28 +13,25 @@ class ManageCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 300,
-      child: Scaffold(
-        appBar: AppBarWidget(
-          title: 'Manage Categories',
-          actions: [
-            ActionButton(
-              icon: Icons.add,
-              title: ' Add ',
-              action: () {},
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-          child: ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final category = categories[index];
-              return CategoryCard(category: category);
-            },
+    return Scaffold(
+      appBar: AppBarWidget(
+        title: 'Manage Categories',
+        actions: [
+          ActionButton(
+            icon: Icons.add,
+            title: ' Add ',
+            action: () {},
           ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+        child: ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return CategoryCard(category: category);
+          },
         ),
       ),
     );

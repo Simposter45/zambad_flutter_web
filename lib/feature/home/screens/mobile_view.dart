@@ -8,7 +8,6 @@ import '../../_global/widgets/appbar_widget.dart';
 import '../model/latest_customer_model.dart';
 import '../widgets/header_widget.dart';
 import '../widgets/side_bar.dart';
-import 'views/dashboard.dart';
 import 'views/manage_categories.dart';
 import 'views/manage_orders.dart';
 import 'views/manage_pos.dart';
@@ -16,7 +15,7 @@ import 'views/manage_products.dart';
 import 'views/manage_users.dart';
 
 class MobileView extends StatelessWidget {
-  MobileView({Key? key}) : super(key: key);
+  const MobileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class MobileView extends StatelessWidget {
         // print(navigationStore.currentIndex);
         final index = navigationStore.currentIndex;
         if (index == 0) {
-          return views[1];
+          return views[5];
         } else {
           return views[1];
         }

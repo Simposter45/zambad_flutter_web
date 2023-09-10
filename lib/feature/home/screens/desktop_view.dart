@@ -44,7 +44,7 @@ class DesktopView extends StatelessWidget {
                   // print(navigationStore.currentIndex);
                   final index = navigationStore.currentIndex;
                   if (index == 0) {
-                    return views[1];
+                    return views[5];
                   } else {
                     return views[1];
                   }

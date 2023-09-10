@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/styles.dart';
-import '../../_global/widgets/action_button.dart';
-import '../../_global/widgets/appbar_widget.dart';
-import '../model/latest_customer_model.dart';
-import '../widgets/header_widget.dart';
 import '../widgets/side_bar.dart';
 import 'views/dashboard.dart';
 import 'views/manage_categories.dart';
@@ -21,7 +14,6 @@ class TabletView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<LatestCustomerModel> orderList = getList();
     final views = [
       Dashboard(),
       ManageProducts(),
@@ -37,7 +29,7 @@ class TabletView extends StatelessWidget {
             // print(navigationStore.currentIndex);
             final index = navigationStore.currentIndex;
             if (index == 0) {
-              return views[1];
+              return views[5];
             } else {
               return views[1];
             }

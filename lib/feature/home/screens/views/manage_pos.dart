@@ -13,35 +13,32 @@ class ManagePos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 300,
-      child: Scaffold(
-        appBar: AppBarWidget(
-          title: 'Manage POS',
-          actions: [
-            ActionButton(
-              icon: Icons.add,
-              title: ' Add Product',
-              action: () {},
+    return Scaffold(
+      appBar: AppBarWidget(
+        title: 'Manage POS',
+        actions: [
+          ActionButton(
+            icon: Icons.add,
+            title: ' Add Product',
+            action: () {},
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            Expanded(
+              child: ListView.builder(
+                itemCount: posList.length,
+                itemBuilder: (context, index) {
+                  final posItem = posList[index];
+                  return PosCard(posItem: posItem);
+                },
+              ),
             ),
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const SizedBox(height: 40),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: posList.length,
-                  itemBuilder: (context, index) {
-                    final posItem = posList[index];
-                    return PosCard(posItem: posItem);
-                  },
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

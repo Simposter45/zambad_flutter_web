@@ -6,7 +6,6 @@ import '../../../../core/utils/responsive.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
 import '../../model/manage_product_model.dart';
-import '../../widgets/side_bar.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
@@ -89,10 +88,11 @@ class ManageProducts extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: GridView.builder(
+                  shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 50,
-                    mainAxisSpacing: 50,
-                    childAspectRatio: .8,
+                    mainAxisSpacing: 40,
+                    childAspectRatio: .65,
                     crossAxisCount: Responsive.isMobile(context)
                         ? 1
                         : Responsive.isTablet(context)
