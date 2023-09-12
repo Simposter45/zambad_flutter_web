@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/styles.dart';
-import '../../../_global/widgets/action_button.dart';
-import '../../../_global/widgets/appbar_widget.dart';
-import '../../model/manage_orders_model.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
+import '../../_global/widgets/action_button.dart';
+import '../../_global/widgets/appbar_widget.dart';
+import '../model/manage_orders_model.dart';
 
 class ManageOrders extends StatelessWidget {
   ManageOrders({Key? key}) : super(key: key);

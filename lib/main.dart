@@ -27,8 +27,10 @@ class DemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
-      child: const MaterialApp(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),
       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/styles.dart';
-import '../../../../core/utils/responsive.dart';
-import '../../../_global/widgets/action_button.dart';
-import '../../../_global/widgets/appbar_widget.dart';
-import '../../model/manage_product_model.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/styles.dart';
+import '../../../core/utils/responsive.dart';
+import '../../_global/widgets/action_button.dart';
+import '../../_global/widgets/appbar_widget.dart';
+import '../models/manage_product_model.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
