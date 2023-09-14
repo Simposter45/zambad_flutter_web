@@ -5,20 +5,33 @@ import '../../../core/constants/styles.dart';
 import '../../../core/utils/responsive.dart';
 import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
+import '../../home/widgets/side_bar.dart';
+import '../../manage_categories/models/manage_categories_model.dart';
 import '../models/manage_product_model.dart';
+import '../widgets/filter_dialog.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ManageProductModel> productList = getProducts();
   final textController = TextEditingController();
+  List<ManageCategoriesModel> categories = getCategories();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBarWidget(
         title: 'Manage Products',
-        // widget: const SideBar(),
+        widget: Responsive.isTablet(context) || Responsive.isMobile(context)
+            ? IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+              )
+            : const SizedBox(),
         actions: [
           ActionButton(
             title: 'Generate Excel',
@@ -31,6 +44,9 @@ class ManageProducts extends StatelessWidget {
           )
         ],
       ),
+      drawer: Responsive.isTablet(context) || Responsive.isMobile(context)
+          ? const SideBar()
+          : null,
       body: Column(
         children: [
           const SizedBox(height: 40),
@@ -60,13 +76,11 @@ class ManageProducts extends StatelessWidget {
                 const SizedBox(width: 30),
                 GestureDetector(
                   onTap: () {
-                    showAboutDialog(
+                    showDialog(
                       context: context,
-                      children: [
-                        const Center(
-                          child: Text('Filter Options'),
-                        )
-                      ],
+                      builder: (context) {
+                        return FilterDialog(categories: categories);
+                      },
                     );
                   },
                   child: const Row(
@@ -90,14 +104,16 @@ class ManageProducts extends StatelessWidget {
               child: GridView.builder(
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 50,
-                    mainAxisSpacing: 40,
-                    childAspectRatio: .65,
-                    crossAxisCount: Responsive.isMobile(context)
-                        ? 1
-                        : Responsive.isTablet(context)
-                            ? 2
-                            : 3,
+                    crossAxisCount: Responsive.isDesktop(context) ||
+                            Responsive.isTablet(context)
+                        ? 3
+                        : 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 62,
+                    childAspectRatio: Responsive.isDesktop(context) ||
+                            Responsive.isTablet(context)
+                        ? 0.5
+                        : 0.45,
                   ),
                   itemCount: productList.length,
                   itemBuilder: (_, index) {
@@ -133,9 +149,14 @@ class ProductCard extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Image.asset(
-              productModel.image,
-              fit: BoxFit.cover,
+            child: Container(
+              constraints: const BoxConstraints(
+                maxWidth: 100,
+              ),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage(productModel.image),
+              )),
             ),
           ),
           const Divider(color: AppColors.deepGold),

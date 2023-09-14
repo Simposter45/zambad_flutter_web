@@ -12,12 +12,14 @@ class DashboardMobile extends StatelessWidget {
   DashboardMobile({
     Key? key,
   }) : super(key: key);
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<LatestCustomerModel> orderList = getList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBarWidget(
         title: 'Dashboard',
         widget: IconButton(
@@ -40,7 +42,6 @@ class DashboardMobile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const HeaderWidget(
                     text: 'Total Number of Orders',

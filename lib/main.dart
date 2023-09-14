@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'feature/home/store/navigation_store.dart';
 import 'feature/login_page/screens/login_screen.dart';
 import 'feature/home/screens/home_screen.dart';
 import 'firebase_options.dart';
@@ -29,6 +30,7 @@ class DemoApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        Provider<NavigationStore>(create: (_) => NavigationStore()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

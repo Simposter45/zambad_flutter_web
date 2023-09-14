@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../providers/auth_provider.dart';
 import '../store/navigation_store.dart';
-
-final navigationStore = NavigationStore();
 
 class SideBar extends StatelessWidget {
   const SideBar({
@@ -15,6 +14,7 @@ class SideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigationStore = context.read<NavigationStore>();
     return Drawer(
       elevation: Responsive.isDesktop(context) ? 0 : 10,
       width: 300,
@@ -100,9 +100,9 @@ class _SideBarTile extends StatelessWidget {
       final isSelected = store.currentIndex == screenIndex;
 
       return InkWell(
-        onTap: () {
+        onTap: () async {
           if (screenIndex == 6) {
-            authprovider
+            await authprovider
                 .logout(context)
                 .whenComplete(() => Navigator.of(context).pop());
           }
@@ -129,13 +129,6 @@ class _SideBarTile extends StatelessWidget {
               const SizedBox(width: 20),
               Text(
                 title,
-                style: TextStyle(
-                  color: isHovered || isSelected ? Colors.white : Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-              Text(
-                store.currentIndex.toString(),
                 style: TextStyle(
                   color: isHovered || isSelected ? Colors.white : Colors.black,
                   fontSize: 18,

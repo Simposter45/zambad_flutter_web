@@ -2,19 +2,31 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/styles.dart';
+import '../../../core/utils/responsive.dart';
 import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
+import '../../home/widgets/side_bar.dart';
 import '../model/manage_user_model.dart';
 
 class ManageUsers extends StatelessWidget {
   ManageUsers({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<ManageUserModel> users = getUsers();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBarWidget(
         title: 'Manage Users',
+        widget: Responsive.isTablet(context) || Responsive.isMobile(context)
+            ? IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+              )
+            : const SizedBox(),
         actions: [
           ActionButton(
             icon: Icons.add,
@@ -23,6 +35,9 @@ class ManageUsers extends StatelessWidget {
           ),
         ],
       ),
+      drawer: Responsive.isTablet(context) || Responsive.isMobile(context)
+          ? const SideBar()
+          : null,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
         child: ListView.builder(

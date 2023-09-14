@@ -5,6 +5,7 @@ import '../../../../core/constants/styles.dart';
 import '../../../../core/utils/responsive.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
+import '../../../manage_orders/screens/order_details.dart';
 import '../../model/latest_customer_model.dart';
 import '../../widgets/header_widget.dart';
 import '../../widgets/side_bar.dart';
@@ -154,7 +155,13 @@ class Dashboard extends StatelessWidget {
                                     alignment: Alignment.center,
                                     child: IconButton(
                                         splashRadius: 10,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          // I need the OrderDetailsScreen to be inside the HomeScreen, Not happening
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OrderDetails()));
+                                        },
                                         icon: const Icon(Icons.info))),
                               ]),
                             ],
