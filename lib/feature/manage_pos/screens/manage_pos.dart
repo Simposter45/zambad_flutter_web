@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/styles.dart';
@@ -7,15 +9,33 @@ import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
 import '../../home/widgets/side_bar.dart';
 import '../model/manage_pos_model.dart';
+import '../store/pos_store.dart';
+import 'edit_pos.dart';
+
+class PosScreen extends StatelessWidget {
+  const PosScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<PosStore>(
+          create: (_) => PosStore(),
+        ),
+      ],
+      child: ManagePos(),
+    );
+  }
+}
 
 class ManagePos extends StatelessWidget {
   ManagePos({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<ManagePosModel> posList = getPos();
 
   @override
   Widget build(BuildContext context) {
+    final posStore = Provider.of<PosStore>(context);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBarWidget(
@@ -31,8 +51,17 @@ class ManagePos extends StatelessWidget {
         actions: [
           ActionButton(
             icon: Icons.add,
-            title: ' Add Product',
-            action: () {},
+            title: ' Add POS',
+            action: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) {
+                  return Provider.value(
+                    value: posStore,
+                    child: EditPos(posStore: posStore),
+                  );
+                }),
+              );
+            },
           ),
         ],
       ),
@@ -45,11 +74,15 @@ class ManagePos extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             Expanded(
-              child: ListView.builder(
-                itemCount: posList.length,
-                itemBuilder: (context, index) {
-                  final posItem = posList[index];
-                  return PosCard(posItem: posItem);
+              child: Observer(
+                builder: (context) {
+                  return ListView.builder(
+                    itemCount: posStore.posList.length,
+                    itemBuilder: (context, index) {
+                      final posItem = posStore.posList[index];
+                      return PosCard(posItem: posItem);
+                    },
+                  );
                 },
               ),
             ),

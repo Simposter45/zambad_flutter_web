@@ -1,7 +1,10 @@
-class ManageCategoriesModel {
-  String category;
+import 'package:flutter/material.dart';
 
+import '../../_global/widgets/alert_dialog_box.dart';
+
+class ManageCategoriesModel {
   ManageCategoriesModel({required this.category});
+  String category;
 }
 
 List<ManageCategoriesModel> getCategories() {
@@ -12,12 +15,21 @@ List<ManageCategoriesModel> getCategories() {
     ManageCategoriesModel(category: 'EarRings'),
     ManageCategoriesModel(category: 'Long chains'),
     ManageCategoriesModel(category: 'Pendant'),
-    ManageCategoriesModel(category: 'Bangle'),
-    ManageCategoriesModel(category: 'Bangle'),
-    ManageCategoriesModel(category: 'Bangle'),
-    ManageCategoriesModel(category: 'Bangle'),
-    ManageCategoriesModel(category: 'Bangle'),
   ];
 
   return list;
+}
+
+Future<String?> addItem(
+    BuildContext context, TextEditingController textController) async {
+  return showDialog<String>(
+    context: context,
+    builder: (context) {
+      return AlertDialogBox(
+        textController: textController,
+        buttonName: 'Add',
+        screenName: 'Category',
+      );
+    },
+  );
 }

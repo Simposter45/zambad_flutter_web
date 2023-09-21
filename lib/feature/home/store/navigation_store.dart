@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import '../../../core/enums/main_page_enums.dart';
 
 part 'navigation_store.g.dart';
 
@@ -6,18 +7,18 @@ class NavigationStore = _NavigationStore with _$NavigationStore;
 
 abstract class _NavigationStore with Store {
   @observable
-  int currentIndex = 0;
+  ScreenType? currentType = ScreenType.Dashboard;
 
   @observable
-  int hoveredIndex = 0;
+  ScreenType? hoveredType;
 
   @action
-  void setCurrentIndex(int index) {
-    currentIndex = index;
+  void setCurrentType(ScreenType type) {
+    currentType = type;
   }
 
   @action
-  void setHoveredIndex(int index) {
-    hoveredIndex = index;
+  void setHoveredType(ScreenType? type) {
+    hoveredType = type;
   }
 }

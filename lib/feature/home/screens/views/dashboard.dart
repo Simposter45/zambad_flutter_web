@@ -5,6 +5,7 @@ import '../../../../core/constants/styles.dart';
 import '../../../../core/utils/responsive.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
+import '../../../manage_orders/model/order_details_model.dart';
 import '../../../manage_orders/screens/order_details.dart';
 import '../../model/latest_customer_model.dart';
 import '../../widgets/header_widget.dart';
@@ -14,6 +15,7 @@ class Dashboard extends StatelessWidget {
   Dashboard({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<LatestCustomerModel> orderList = getList();
+  final List<OrderDetailsModel> orders = getOrderDetails();
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +120,9 @@ class Dashboard extends StatelessWidget {
                       ),
                       ListView.builder(
                         shrinkWrap: true,
-                        itemCount: orderList.length,
+                        itemCount: orders.length,
                         itemBuilder: (context, index) {
-                          final model = orderList[index];
+                          final model = orders[index];
                           return Table(
                             border: const TableBorder(
                                 bottom: BorderSide(color: AppColors.grey7)),
@@ -135,24 +137,16 @@ class Dashboard extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             children: [
                               TableRow(children: [
-                                Container(
-                                    height: 40,
-                                    alignment: Alignment.center,
+                                // Create a Separate Widget for this
+                                Align(
                                     child: Text(
-                                      model.orderId,
-                                      style: AppTextStyles.sairaGoldSmall,
-                                    )),
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: Text(model.pos)),
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: Text(model.date)),
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: Text(model.customerName)),
-                                Container(
-                                    alignment: Alignment.center,
+                                  model.orderId,
+                                  style: AppTextStyles.sairaGoldSmall,
+                                )),
+                                Align(child: Text(model.pos)),
+                                Align(child: Text(model.updatedAt.toString())),
+                                Align(child: Text(model.customerName)),
+                                Align(
                                     child: IconButton(
                                         splashRadius: 10,
                                         onPressed: () {
@@ -160,7 +154,10 @@ class Dashboard extends StatelessWidget {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      OrderDetails()));
+                                                      OrderDetails(
+                                                        orderDetailsModel:
+                                                            model,
+                                                      )));
                                         },
                                         icon: const Icon(Icons.info))),
                               ]),

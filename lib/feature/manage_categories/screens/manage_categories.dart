@@ -7,11 +7,61 @@ import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
 import '../../home/widgets/side_bar.dart';
 import '../models/manage_categories_model.dart';
+import '../../_global/widgets/alert_dialog_box.dart';
 
-class ManageCategories extends StatelessWidget {
+class ManageCategories extends StatefulWidget {
   ManageCategories({Key? key}) : super(key: key);
+
+  @override
+  State<ManageCategories> createState() => _ManageCategoriesState();
+}
+
+class _ManageCategoriesState extends State<ManageCategories> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<ManageCategoriesModel> categories = getCategories();
+
+  final textController = TextEditingController();
+
+  void removeItem(BuildContext context, ManageCategoriesModel category) {
+    setState(() {
+      categories.removeWhere((element) => element == category);
+    });
+  }
+
+  Future<void> editItem(BuildContext context, String initialValue) async {
+    final TextEditingController controller =
+        TextEditingController(text: initialValue);
+
+    final editedCategory = await showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialogBox(
+          textController: controller,
+          buttonName: 'Update',
+          screenName: 'Category',
+        );
+      },
+    );
+
+    if (editedCategory != null && editedCategory.isNotEmpty) {
+      final index = categories
+          .indexWhere((category) => category.category == initialValue);
+
+      if (index != -1) {
+        setState(() {
+          categories[index] = ManageCategoriesModel(category: editedCategory);
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    textController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +81,14 @@ class ManageCategories extends StatelessWidget {
           ActionButton(
             icon: Icons.add,
             title: ' Add ',
-            action: () {},
+            action: () async {
+              final category = await addItem(context, textController);
+              if (category != null && category != "") {
+                setState(() {
+                  categories.add(ManageCategoriesModel(category: category));
+                });
+              }
+            },
           ),
         ],
       ),
@@ -44,7 +101,15 @@ class ManageCategories extends StatelessWidget {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
-            return CategoryCard(category: category);
+            return CategoryCard(
+              category: category,
+              onDelete: () {
+                removeItem(context, category);
+              },
+              onEdit: (editedCategory) {
+                editItem(context, editedCategory);
+              },
+            );
           },
         ),
       ),
@@ -54,11 +119,15 @@ class ManageCategories extends StatelessWidget {
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
-    Key? key,
     required this.category,
+    required this.onDelete,
+    required this.onEdit,
+    Key? key,
   }) : super(key: key);
 
   final ManageCategoriesModel category;
+  final VoidCallback onDelete;
+  final Function(String) onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +153,7 @@ class CategoryCard extends StatelessWidget {
           )),
           const VerticalDivider(color: AppColors.borderGrey),
           IconButton(
-              onPressed: () {},
+              onPressed: () => onEdit(category.category),
               splashRadius: 10,
               icon: const Icon(
                 Icons.edit,
@@ -92,7 +161,7 @@ class CategoryCard extends StatelessWidget {
                 size: 16,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: onDelete,
               splashRadius: 10,
               icon: const Icon(
                 Icons.delete,

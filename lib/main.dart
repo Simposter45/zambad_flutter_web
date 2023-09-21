@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'feature/home/store/navigation_store.dart';
 import 'feature/login_page/screens/login_screen.dart';
 import 'feature/home/screens/home_screen.dart';
+import 'feature/manage_orders/screens/order_details.dart';
 import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
 

@@ -104,16 +104,13 @@ class ManageProducts extends StatelessWidget {
               child: GridView.builder(
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: 500,
                     crossAxisCount: Responsive.isDesktop(context) ||
                             Responsive.isTablet(context)
                         ? 3
                         : 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 62,
-                    childAspectRatio: Responsive.isDesktop(context) ||
-                            Responsive.isTablet(context)
-                        ? 0.5
-                        : 0.45,
+                    crossAxisSpacing: 40,
+                    mainAxisSpacing: 60,
                   ),
                   itemCount: productList.length,
                   itemBuilder: (_, index) {
@@ -141,24 +138,44 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
+        // image: DecorationImage(
+        //   fit: BoxFit.cover,
+        //   image: AssetImage(productModel.image),
+        // ),
         border: Border.all(
           color: AppColors.deepGold,
         ),
         borderRadius: BorderRadius.circular(7),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Expanded(
-            child: Container(
-              constraints: const BoxConstraints(
-                maxWidth: 100,
+              child: Image.asset(
+            productModel.image,
+          )
+
+              // DecoratedBox(
+              //   decoration: BoxDecoration(
+              //       // border: Border.all(
+              //       //   color: AppColors.deepGold,
+              //       //   // top: BorderSide(
+              //       //   //   color: AppColors.deepGold,
+              //       //   // ),
+              //       //   // left: BorderSide(
+              //       //   //   color: Color.fromRGBO(167, 122, 19, 1),
+              //       //   // ),
+              //       //   // right: BorderSide(
+              //       //   //   color: AppColors.deepGold,
+              //       //   // ),
+              //       // ),
+              //       borderRadius: BorderRadius.circular(7),
+              //       image: DecorationImage(
+              //         fit: BoxFit.cover,
+              //         image: AssetImage(productModel.image),
+              //       )),
+              // ),
               ),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage(productModel.image),
-              )),
-            ),
-          ),
           const Divider(color: AppColors.deepGold),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

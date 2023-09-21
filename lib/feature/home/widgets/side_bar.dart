@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/enums/main_page_enums.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../providers/auth_provider.dart';
 import '../store/navigation_store.dart';
@@ -32,43 +33,61 @@ class SideBar extends StatelessWidget {
               iconData: Icons.dashboard_outlined,
               title: "Dashboard",
               store: navigationStore,
-              screenIndex: 0,
+              screenType: ScreenType.Dashboard,
             ),
             _SideBarTile(
               iconData: Icons.shopping_bag_outlined,
               title: "Manage Products",
               store: navigationStore,
-              screenIndex: 1,
+              screenType: ScreenType.ManageProducts,
             ),
             _SideBarTile(
               iconData: Icons.receipt_long_outlined,
               title: "Manage Orders",
               store: navigationStore,
-              screenIndex: 2,
+              screenType: ScreenType.ManageOrders,
             ),
             _SideBarTile(
               iconData: Icons.storefront_outlined,
               title: "Manage POS",
               store: navigationStore,
-              screenIndex: 3,
+              screenType: ScreenType.ManagePOS,
             ),
             _SideBarTile(
               iconData: Icons.category_outlined,
               title: "Manage Categories",
               store: navigationStore,
-              screenIndex: 4,
+              screenType: ScreenType.ManageCategories,
+            ),
+            _SideBarTile(
+              iconData: Icons.home_work_outlined,
+              title: "Manage States",
+              store: navigationStore,
+              screenType: ScreenType.ManageStates,
             ),
             _SideBarTile(
               iconData: Icons.group_outlined,
               title: "Manage Users",
               store: navigationStore,
-              screenIndex: 5,
+              screenType: ScreenType.ManageUsers,
+            ),
+            _SideBarTile(
+              iconData: Icons.money_rounded,
+              title: "Manage Gold Purity",
+              store: navigationStore,
+              screenType: ScreenType.ManageGoldPurity,
+            ),
+            _SideBarTile(
+              iconData: Icons.color_lens_outlined,
+              title: "Manage Color",
+              store: navigationStore,
+              screenType: ScreenType.ManageColor,
             ),
             _SideBarTile(
               iconData: Icons.logout_outlined,
               title: "Logout",
               store: navigationStore,
-              screenIndex: 6,
+              screenType: ScreenType.Logout,
             ),
           ],
         ),
@@ -82,37 +101,40 @@ class _SideBarTile extends StatelessWidget {
     required this.iconData,
     required this.title,
     required this.store,
-    required this.screenIndex,
+    required this.screenType,
     Key? key,
   }) : super(key: key);
 
   final IconData iconData;
   final String title;
   final NavigationStore store;
-  final int screenIndex;
+  final ScreenType screenType;
 
   @override
   Widget build(BuildContext context) {
     final authprovider = AuthProvider();
 
     return Observer(builder: (context) {
-      final isHovered = store.hoveredIndex == screenIndex;
-      final isSelected = store.currentIndex == screenIndex;
+      final isHovered = store.hoveredType == screenType;
+      final isSelected = store.currentType == screenType;
 
       return InkWell(
         onTap: () async {
-          if (screenIndex == 6) {
+          if (screenType == ScreenType.Logout) {
             await authprovider
                 .logout(context)
                 .whenComplete(() => Navigator.of(context).pop());
           }
-          store.setCurrentIndex(screenIndex);
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
+          store.setCurrentType(screenType);
         },
         onHover: (value) {
           if (value) {
-            store.setHoveredIndex(screenIndex);
+            store.setHoveredType(screenType);
           } else {
-            store.setHoveredIndex(-1);
+            store.setHoveredType(null);
           }
         },
         child: Container(

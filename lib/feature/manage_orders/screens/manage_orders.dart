@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/styles.dart';
+import '../../../core/helper/text_widget.dart';
 import '../../../core/utils/responsive.dart';
 import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
 import '../../home/widgets/side_bar.dart';
-import '../model/manage_orders_model.dart';
+import '../model/order_details_model.dart';
 import '../store/order_store.dart';
+import 'order_details.dart';
 
-class ManageOrders extends StatelessWidget {
-  ManageOrders({Key? key}) : super(key: key);
+class ManageOrders extends StatefulWidget {
+  const ManageOrders({Key? key}) : super(key: key);
+
+  @override
+  State<ManageOrders> createState() => _ManageOrdersState();
+}
+
+class _ManageOrdersState extends State<ManageOrders> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<ManageOrderModel> orderList = getOrders();
+
+  // final List<ManageOrderModel> orderList = getOrders();
+  final List<OrderDetailsModel> orders = getOrderDetails();
+
   final textController = TextEditingController();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    textController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final store = context.read<OrderStore>();
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBarWidget(
@@ -37,7 +57,7 @@ class ManageOrders extends StatelessWidget {
           ),
           ActionButton(
             icon: Icons.add,
-            title: ' Add Product',
+            title: ' Add Orders',
             action: () {},
           ),
         ],
@@ -55,7 +75,7 @@ class ManageOrders extends StatelessWidget {
               child: SearchBar(
                 controller: textController,
                 leading: const Icon(Icons.search, size: 16),
-                hintText: 'Search by any Products name',
+                hintText: 'Search by any Orders name',
                 hintStyle: MaterialStatePropertyAll(
                   AppTextStyles.sairaLightGrey.copyWith(fontSize: 14),
                 ),
@@ -72,12 +92,12 @@ class ManageOrders extends StatelessWidget {
             const SizedBox(height: 50),
             Expanded(
               child: ListView.builder(
-                  itemCount: orderList.length,
+                  itemCount: orders.length,
                   itemBuilder: (context, index) {
-                    final orderItem = orderList[index];
+                    final orderItem = orders[index];
                     return InkWell(
                         onHover: (value) {},
-                        child: OrderCard(orderItem: orderItem));
+                        child: OrderCard(orderItem: orderItem, store: store));
                   }),
             )
           ],
@@ -90,24 +110,34 @@ class ManageOrders extends StatelessWidget {
 class OrderCard extends StatelessWidget {
   OrderCard({
     required this.orderItem,
+    required this.store,
     Key? key,
   }) : super(key: key);
 
-  final ManageOrderModel orderItem;
+  final OrderDetailsModel orderItem;
+  final OrderStore store;
 
   bool isHovered = false;
-  final store = OrderStore(isHovered: false);
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        final isHovered = store.isHovered;
+        final isHovered = store.orderHoverStates[orderItem.orderId] ?? false;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: InkWell(
-            onTap: () {},
-            onHover: store.setHoveredIndex,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => OrderDetails(
+                            orderDetailsModel: orderItem,
+                          )));
+            },
+            onHover: (hover) {
+              store.setOrderHoverState(orderItem.orderId, hover);
+            },
             child: DecoratedBox(
               decoration: BoxDecoration(
                   color: isHovered ? AppColors.deepGold : null,
@@ -134,7 +164,7 @@ class OrderCard extends StatelessWidget {
                       TextWidget(
                         isHovered: isHovered,
                         firstText: 'Sales Person : ',
-                        lastText: orderItem.salesPerson,
+                        lastText: orderItem.salesPersonName,
                       ),
                       TextWidget(
                         isHovered: isHovered,
@@ -144,7 +174,7 @@ class OrderCard extends StatelessWidget {
                       TextWidget(
                         isHovered: isHovered,
                         firstText: 'Date : ',
-                        lastText: orderItem.date,
+                        lastText: orderItem.createdAt.toString(),
                       ),
                     ]),
               ),
@@ -152,38 +182,6 @@ class OrderCard extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({
-    required this.isHovered,
-    required this.firstText,
-    required this.lastText,
-    Key? key,
-  }) : super(key: key);
-
-  final bool isHovered;
-  final String firstText;
-  final String lastText;
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-          text: firstText,
-          style: AppTextStyles.nunitoSansBold.copyWith(
-            color: isHovered ? Colors.white : Colors.black,
-          ),
-          children: [
-            TextSpan(
-              text: lastText,
-              style: AppTextStyles.nunitoSansNormal.copyWith(
-                color: isHovered ? Colors.white : Colors.black,
-              ),
-            )
-          ]),
     );
   }
 }
