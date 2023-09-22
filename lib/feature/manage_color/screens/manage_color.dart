@@ -20,11 +20,11 @@ class _ManageColorState extends State<ManageColor> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
 
-  List<ManageColorModel> colors = getcolors();
+  List<ManageColorModel> colors = colorList;
 
   void removeItem(BuildContext context, ManageColorModel color) {
     setState(() {
-      colors.removeWhere((element) => element == color);
+      colors.remove(color);
     });
   }
 

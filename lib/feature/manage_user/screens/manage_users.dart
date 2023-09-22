@@ -11,7 +11,7 @@ import '../model/manage_user_model.dart';
 class ManageUsers extends StatelessWidget {
   ManageUsers({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<ManageUserModel> users = getUsers();
+  List<ManageUserModel> users = userslist;
 
   @override
   Widget build(BuildContext context) {

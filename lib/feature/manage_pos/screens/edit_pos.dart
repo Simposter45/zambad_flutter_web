@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/colors.dart';
@@ -11,12 +10,16 @@ import '../model/manage_pos_model.dart';
 import '../store/pos_store.dart';
 
 class EditPos extends StatefulWidget {
-  final PosStore posStore;
-
   const EditPos({
-    required this.posStore,
+    required this.actionName,
+    required this.buttonName,
+    this.existingPos,
     Key? key,
   }) : super(key: key);
+
+  final ManagePosModel? existingPos;
+  final String actionName;
+  final String buttonName;
 
   @override
   State<EditPos> createState() => _EditPosState();
@@ -27,6 +30,17 @@ class _EditPosState extends State<EditPos> {
 
   final nameController = TextEditingController();
   final descController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    if (widget.existingPos != null) {
+      nameController.text = widget.existingPos!.posName;
+      descController.text = widget.existingPos!.description ?? '';
+    }
+  }
 
   @override
   void dispose() {
@@ -55,7 +69,7 @@ class _EditPosState extends State<EditPos> {
                 ? const SideBar()
                 : null,
             appBar: AppBarWidget(
-              title: 'Add POS',
+              title: '${widget.actionName} POS',
               widget:
                   Responsive.isTablet(context) || Responsive.isMobile(context)
                       ? Row(
@@ -134,22 +148,33 @@ class _EditPosState extends State<EditPos> {
                               MaterialStatePropertyAll(AppColors.deepGold),
                         ),
                         onPressed: () {
-                          final newPos = ManagePosModel(
-                            posName: nameController.text,
-                            date: DateTime.now().toString(),
-                            description: descController.text,
-                          );
+                          if (widget.existingPos != null) {
+                            final editedPos = ManagePosModel(
+                              posName: nameController.text,
+                              date: DateTime.now().toString().substring(0, 11),
+                              description: descController.text,
+                            );
+                            if (editedPos.posName.isNotEmpty) {
+                              posStore.editPos(editedPos, widget.existingPos!);
+                            }
+                          } else {
+                            final newPos = ManagePosModel(
+                              posName: nameController.text,
+                              date: DateTime.now().toString().substring(0, 11),
+                              description: descController.text,
+                            );
 
-                          setState(() {
-                            widget.posStore.addPos(newPos);
-                          });
+                            if (newPos.posName.isNotEmpty) {
+                              posStore.addPos(newPos);
+                            }
+                          }
 
                           Navigator.pop(context);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            'Create',
+                            widget.buttonName,
                             style: AppTextStyles.nunitoSansNormal
                                 .copyWith(color: Colors.white),
                           ),

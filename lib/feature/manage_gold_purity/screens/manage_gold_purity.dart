@@ -19,7 +19,7 @@ class ManageGoldPurity extends StatefulWidget {
 class _ManageGoldPurityState extends State<ManageGoldPurity> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<ManageGoldPurityModel> goldPurities = getGoldPurity();
+  List<ManageGoldPurityModel> goldPurities = goldPurityList;
 
   final textController = TextEditingController();
 

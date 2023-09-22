@@ -7,18 +7,14 @@ class ManageCategoriesModel {
   String category;
 }
 
-List<ManageCategoriesModel> getCategories() {
-  final List<ManageCategoriesModel> list = [
-    ManageCategoriesModel(category: 'Bangle'),
-    ManageCategoriesModel(category: 'Bracelet'),
-    ManageCategoriesModel(category: 'Chain'),
-    ManageCategoriesModel(category: 'EarRings'),
-    ManageCategoriesModel(category: 'Long chains'),
-    ManageCategoriesModel(category: 'Pendant'),
-  ];
-
-  return list;
-}
+List<ManageCategoriesModel> categoryList = [
+  ManageCategoriesModel(category: 'Bangle'),
+  ManageCategoriesModel(category: 'Bracelet'),
+  ManageCategoriesModel(category: 'Chain'),
+  ManageCategoriesModel(category: 'EarRings'),
+  ManageCategoriesModel(category: 'Long chains'),
+  ManageCategoriesModel(category: 'Pendant'),
+];
 
 Future<String?> addItem(
     BuildContext context, TextEditingController textController) async {

@@ -24,7 +24,7 @@ class _ManageOrdersState extends State<ManageOrders> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // final List<ManageOrderModel> orderList = getOrders();
-  final List<OrderDetailsModel> orders = getOrderDetails();
+  final List<OrderDetailsModel> orders = orderList;
 
   final textController = TextEditingController();
 
@@ -97,7 +97,9 @@ class _ManageOrdersState extends State<ManageOrders> {
                     final orderItem = orders[index];
                     return InkWell(
                         onHover: (value) {},
-                        child: OrderCard(orderItem: orderItem, store: store));
+                        child: Provider.value(
+                            value: store,
+                            child: OrderCard(orderItem: orderItem)));
                   }),
             )
           ],
@@ -110,17 +112,16 @@ class _ManageOrdersState extends State<ManageOrders> {
 class OrderCard extends StatelessWidget {
   OrderCard({
     required this.orderItem,
-    required this.store,
     Key? key,
   }) : super(key: key);
 
   final OrderDetailsModel orderItem;
-  final OrderStore store;
 
   bool isHovered = false;
 
   @override
   Widget build(BuildContext context) {
+    final store = context.read<OrderStore>();
     return Observer(
       builder: (context) {
         final isHovered = store.orderHoverStates[orderItem.orderId] ?? false;

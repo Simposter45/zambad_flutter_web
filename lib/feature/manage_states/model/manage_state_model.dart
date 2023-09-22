@@ -7,19 +7,6 @@ class ManageStateModel {
   String state;
 }
 
-List<ManageStateModel> getStates() {
-  final List<ManageStateModel> list = [
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-    ManageStateModel(state: 'Maharashtra'),
-  ];
-  return list;
-}
-
 List<ManageStateModel> statesList = [
   ManageStateModel(state: 'Maharashtra'),
   ManageStateModel(state: 'Maharashtra'),

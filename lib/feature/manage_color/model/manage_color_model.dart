@@ -7,17 +7,14 @@ class ManageColorModel {
   String color;
 }
 
-List<ManageColorModel> getcolors() {
-  final List<ManageColorModel> list = [
-    ManageColorModel(color: 'Blue'),
-    ManageColorModel(color: 'Gold'),
-    ManageColorModel(color: 'Red'),
-    ManageColorModel(color: 'Rose Gold'),
-    ManageColorModel(color: 'Black'),
-    ManageColorModel(color: 'White Gold'),
-  ];
-  return list;
-}
+final List<ManageColorModel> colorList = [
+  ManageColorModel(color: 'Blue'),
+  ManageColorModel(color: 'Gold'),
+  ManageColorModel(color: 'Red'),
+  ManageColorModel(color: 'Rose Gold'),
+  ManageColorModel(color: 'Black'),
+  ManageColorModel(color: 'White Gold'),
+];
 
 Future<String?> addItem(
     BuildContext context, TextEditingController textController) async {

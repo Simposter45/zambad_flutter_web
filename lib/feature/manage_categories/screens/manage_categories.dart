@@ -19,7 +19,7 @@ class ManageCategories extends StatefulWidget {
 class _ManageCategoriesState extends State<ManageCategories> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<ManageCategoriesModel> categories = getCategories();
+  List<ManageCategoriesModel> categories = categoryList;
 
   final textController = TextEditingController();
 

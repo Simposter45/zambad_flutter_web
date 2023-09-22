@@ -14,9 +14,9 @@ class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<ManageProductModel> productList = getProducts();
+  final List<ManageProductModel> productList = productsList;
   final textController = TextEditingController();
-  List<ManageCategoriesModel> categories = getCategories();
+  List<ManageCategoriesModel> categories = categoryList;
 
   @override
   Widget build(BuildContext context) {

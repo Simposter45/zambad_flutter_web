@@ -20,7 +20,7 @@ class _ManageStateState extends State<ManageState> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
 
-  List<ManageStateModel> states = getStates();
+  List<ManageStateModel> states = statesList;
 
   void removeItem(BuildContext context, ManageStateModel state) {
     setState(() {

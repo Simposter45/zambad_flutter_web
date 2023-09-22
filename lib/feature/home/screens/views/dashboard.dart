@@ -7,15 +7,13 @@ import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
 import '../../../manage_orders/model/order_details_model.dart';
 import '../../../manage_orders/screens/order_details.dart';
-import '../../model/latest_customer_model.dart';
 import '../../widgets/header_widget.dart';
 import '../../widgets/side_bar.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<LatestCustomerModel> orderList = getList();
-  final List<OrderDetailsModel> orders = getOrderDetails();
+  final List<OrderDetailsModel> orders = orderList;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +85,7 @@ class Dashboard extends StatelessWidget {
                         style: AppTextStyles.nunitoSansBold,
                       ),
                     ),
-                    if (orderList.isNotEmpty) ...[
+                    if (orders.isNotEmpty) ...[
                       const SizedBox(height: 10),
                       Container(
                         height: 54,
@@ -141,7 +139,8 @@ class Dashboard extends StatelessWidget {
                                 Align(
                                     child: Text(
                                   model.orderId,
-                                  style: AppTextStyles.sairaGoldSmall,
+                                  style: AppTextStyles.sairaGoldSmall
+                                      .copyWith(fontWeight: FontWeight.bold),
                                 )),
                                 Align(child: Text(model.pos)),
                                 Align(child: Text(model.updatedAt.toString())),
@@ -150,7 +149,6 @@ class Dashboard extends StatelessWidget {
                                     child: IconButton(
                                         splashRadius: 10,
                                         onPressed: () {
-                                          // I need the OrderDetailsScreen to be inside the HomeScreen, Not happening
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
@@ -170,7 +168,7 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
             ]),
-            if (orderList.isEmpty)
+            if (orders.isEmpty)
               const Center(
                 child: Text(
                   'No latest orders',

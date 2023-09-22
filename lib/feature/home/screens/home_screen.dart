@@ -9,6 +9,7 @@ import '../../manage_color/screens/manage_color.dart';
 import '../../manage_gold_purity/screens/manage_gold_purity.dart';
 import '../../manage_orders/screens/manage_orders.dart';
 import '../../manage_orders/store/order_store.dart';
+import '../../manage_pos/model/manage_pos_model.dart';
 import '../../manage_pos/screens/manage_pos.dart';
 import '../../manage_pos/store/pos_store.dart';
 import '../../manage_products/screens/manage_products.dart';
@@ -18,6 +19,25 @@ import '../store/navigation_store.dart';
 import '../widgets/side_bar.dart';
 import 'views/dashboard.dart';
 import 'views/dashboard_mobile.dart';
+
+class HomeScreenProviders extends StatelessWidget {
+  const HomeScreenProviders({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<OrderStore>(
+          create: (_) => OrderStore(),
+        ),
+        Provider<PosStore>(
+          create: (_) => PosStore(posList: posList),
+        ),
+      ],
+      child: const HomeScreen(),
+    );
+  }
+}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -40,20 +60,12 @@ class HomeScreen extends StatelessWidget {
           break;
 
         case ScreenType.ManageOrders:
-          currentView = Material(
-            child: MultiProvider(
-              providers: [
-                Provider<OrderStore>(
-                  create: (_) => OrderStore(),
-                ),
-              ],
-              child: ManageOrders(),
-            ),
-          );
+          currentView = ManageOrders();
+
           break;
 
         case ScreenType.ManagePOS:
-          currentView = PosScreen();
+          currentView = ManagePos();
           break;
 
         case ScreenType.ManageCategories:
@@ -85,9 +97,9 @@ class HomeScreen extends StatelessWidget {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topCenter,
-              child: const SideBar(),
+              child: SideBar(),
             ),
             Expanded(
               child: currentView!,

@@ -33,9 +33,9 @@ class DemoApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         Provider<NavigationStore>(create: (_) => NavigationStore()),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: HomeScreenProviders(),
       ),
     );
   }

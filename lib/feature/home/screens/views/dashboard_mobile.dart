@@ -4,7 +4,8 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/styles.dart';
 import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
-import '../../model/latest_customer_model.dart';
+import '../../../manage_orders/model/order_details_model.dart';
+import '../../../manage_orders/screens/order_details.dart';
 import '../../widgets/header_widget.dart';
 import '../../widgets/side_bar.dart';
 
@@ -14,7 +15,7 @@ class DashboardMobile extends StatelessWidget {
   }) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<LatestCustomerModel> orderList = getList();
+  final List<OrderDetailsModel> orders = orderList;
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +82,13 @@ class DashboardMobile extends StatelessWidget {
                       style: AppTextStyles.sairaNormal.copyWith(fontSize: 20),
                     ),
                   ),
-                  if (orderList.isNotEmpty)
+                  if (orders.isNotEmpty)
                     ListView.builder(
                       shrinkWrap: true,
                       controller: ScrollController(),
-                      itemCount: orderList.length,
+                      itemCount: orders.length,
                       itemBuilder: (context, index) {
-                        final order = orderList[index];
+                        final order = orders[index];
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -144,14 +145,21 @@ class DashboardMobile extends StatelessWidget {
                                     order.pos,
                                   ),
                                   Text(
-                                    order.date,
+                                    order.createdAt.toString(),
                                   ),
                                   Text(
                                     order.customerName,
                                   ),
                                   IconButton(
                                       splashRadius: 10,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderDetails(
+                                                      orderDetailsModel: order,
+                                                    )));
+                                      },
                                       icon: const Icon(Icons.info, size: 20))
                                 ],
                               ),
@@ -163,7 +171,7 @@ class DashboardMobile extends StatelessWidget {
                 ],
               ),
             ),
-            if (orderList.isEmpty)
+            if (orders.isEmpty)
               const Center(
                 child: Text('No latest orders',
                     textAlign: TextAlign.center,

@@ -12,22 +12,6 @@ import '../model/manage_pos_model.dart';
 import '../store/pos_store.dart';
 import 'edit_pos.dart';
 
-class PosScreen extends StatelessWidget {
-  const PosScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<PosStore>(
-          create: (_) => PosStore(),
-        ),
-      ],
-      child: ManagePos(),
-    );
-  }
-}
-
 class ManagePos extends StatelessWidget {
   ManagePos({Key? key}) : super(key: key);
 
@@ -57,7 +41,10 @@ class ManagePos extends StatelessWidget {
                 MaterialPageRoute(builder: (context) {
                   return Provider.value(
                     value: posStore,
-                    child: EditPos(posStore: posStore),
+                    child: const EditPos(
+                      actionName: 'Add',
+                      buttonName: 'Create',
+                    ),
                   );
                 }),
               );
@@ -103,6 +90,7 @@ class PosCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final posStore = context.read<PosStore>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: DecoratedBox(
@@ -136,7 +124,20 @@ class PosCard extends StatelessWidget {
                       )),
                   IconButton(
                       splashRadius: 10,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return Provider.value(
+                              value: posStore,
+                              child: EditPos(
+                                existingPos: posItem,
+                                actionName: 'Edit',
+                                buttonName: 'Submit',
+                              ),
+                            );
+                          }),
+                        );
+                      },
                       icon: const Icon(
                         Icons.edit,
                         size: 14,
@@ -144,7 +145,9 @@ class PosCard extends StatelessWidget {
                       )),
                   IconButton(
                       splashRadius: 10,
-                      onPressed: () {},
+                      onPressed: () {
+                        posStore.deletePos(posItem);
+                      },
                       icon: const Icon(
                         Icons.delete,
                         size: 14,

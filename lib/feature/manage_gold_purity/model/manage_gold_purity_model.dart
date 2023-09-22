@@ -7,17 +7,14 @@ class ManageGoldPurityModel {
   String goldPurity;
 }
 
-List<ManageGoldPurityModel> getGoldPurity() {
-  final List<ManageGoldPurityModel> list = [
-    ManageGoldPurityModel(goldPurity: '24K'),
-    ManageGoldPurityModel(goldPurity: '22K'),
-    ManageGoldPurityModel(goldPurity: '10K'),
-    ManageGoldPurityModel(goldPurity: '2K'),
-    ManageGoldPurityModel(goldPurity: '10K'),
-    ManageGoldPurityModel(goldPurity: 'Diamond Carat'),
-  ];
-  return list;
-}
+List<ManageGoldPurityModel> goldPurityList = [
+  ManageGoldPurityModel(goldPurity: '24K'),
+  ManageGoldPurityModel(goldPurity: '22K'),
+  ManageGoldPurityModel(goldPurity: '10K'),
+  ManageGoldPurityModel(goldPurity: '2K'),
+  ManageGoldPurityModel(goldPurity: '10K'),
+  ManageGoldPurityModel(goldPurity: 'Diamond Carat'),
+];
 
 Future<String?> addItem(
     BuildContext context, TextEditingController textController) async {

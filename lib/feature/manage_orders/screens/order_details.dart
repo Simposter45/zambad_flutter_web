@@ -8,10 +8,11 @@ import '../../../core/utils/responsive.dart';
 import '../../_global/widgets/action_button.dart';
 import '../../_global/widgets/appbar_widget.dart';
 import '../../home/widgets/side_bar.dart';
+import '../../manage_products/models/manage_product_model.dart';
 import '../model/order_details_model.dart';
 
 class OrderDetails extends StatelessWidget {
-  OrderDetails({Key? key, required this.orderDetailsModel}) : super(key: key);
+  OrderDetails({required this.orderDetailsModel, Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -165,13 +166,13 @@ class _YourOrders extends StatelessWidget {
           OrderDetailsWidget(
             1,
             orderDetailType: "Order Date:",
-            orderDetail: model.createdAt.toString(),
+            orderDetail: model.createdAt.toString().substring(0, 11),
           ),
           const SizedBox(height: 16),
           OrderDetailsWidget(
             1,
             orderDetailType: "Last Updated At:",
-            orderDetail: model.updatedAt.toString(),
+            orderDetail: model.updatedAt.toString().substring(0, 11),
           ),
           if (model.extraImages.isNotEmpty) ...[
             const SizedBox(height: 15),
@@ -192,22 +193,150 @@ class _YourOrders extends StatelessWidget {
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 15),
-          //   child: ListView.separated(
-          //     itemCount: model.products.length,
-          //     separatorBuilder: (_, __) => const SizedBox(height: 20),
-          //     shrinkWrap: true,
-          //     physics: const NeverScrollableScrollPhysics(),
-          //     itemBuilder: (_, index) {
-          //       final productModel = model.products[index];
-          //       return _YourProductsWidget(
-          //         model: productModel,
-          //         index: index,
-          //       );
-          //     },
-          //   ),
-          // )
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: ListView.separated(
+              itemCount: model.products.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 20),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (_, index) {
+                final productModel = model.products[index];
+                return _YourProductsWidget(
+                  model: productModel,
+                  index: index,
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _YourProductsWidget extends StatelessWidget {
+  const _YourProductsWidget({required this.model, required this.index});
+  final ManageProductModel model;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${index + 1}.",
+            style: AppTextStyles.nunitoSansNormal,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(left: 11, top: 21, bottom: 17),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.grey8),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // CachedNetworkImage(
+                  //   imageUrl: model.images.first,
+                  //   imageBuilder: (context, imageProvider) => Container(
+                  //     height: 75,
+                  //     width: 72,
+                  //     padding: const EdgeInsets.symmetric(horizontal: 7),
+                  //     decoration: BoxDecoration(
+                  //         color: AppColors.peachColor,
+                  //         border: Border.all(
+                  //           color: AppColors.logoColor,
+                  //         ),
+                  //         image: DecorationImage(image: imageProvider)),
+                  //   ),
+                  //   placeholder: (context, url) => const LoadingWidget(),
+                  //   errorWidget: (context, url, error) => ColoredBox(
+                  //     color: Colors.white,
+                  //     child: Center(
+                  //       child:
+                  //           Image.asset('assets/png/app/logo.png', height: 55),
+                  //     ),
+                  //   ),
+                  // ),
+                  const SizedBox(width: 13),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          model.title,
+                          style: AppTextStyles.nunitoSansNormal.copyWith(
+                            color: AppColors.grey9,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        if (model.desc.isNotEmpty) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            model.desc,
+                            style: AppTextStyles.nunitoSansNormal.copyWith(
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                        // const SizedBox(height: 11),
+                        // ProductDetailsWidget(
+                        //   spacing: 43,
+                        //   productSubDetailName: 'Category -',
+                        //   productSubDetailValue: model.category,
+                        // ),
+                        // const SizedBox(height: 10),
+                        // ProductDetailsWidget(
+                        //   spacing: 18,
+                        //   productSubDetailName: 'Subcategory -',
+                        //   productSubDetailValue: model.subCategory,
+                        // ),
+                        const SizedBox(height: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Attribute -",
+                              style: AppTextStyles.nunitoSansNormal.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(width: 44),
+                            // Expanded(
+                            //     child: AttributesWidget(
+                            //         attributes: model.attributes))
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 83,
+                          children: [
+                            Text(
+                              'Qty -',
+                              style: AppTextStyles.nunitoSansNormal.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "1",
+                              style: AppTextStyles.nunitoSansNormal.copyWith(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -318,26 +447,25 @@ class OrderDetailsWidget extends StatelessWidget {
               ],
             )
           : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  orderDetailType,
-                  style: AppTextStyles.nunitoSansNormal
-                      .copyWith(fontWeight: FontWeight.w500),
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    orderDetailType,
+                    style: AppTextStyles.nunitoSansBold,
+                  ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 50),
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Text(
-                        orderDetail,
-                        style: AppTextStyles.nunitoNormal,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: maxLines,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      orderDetail,
+                      style: AppTextStyles.nunitoNormal,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: maxLines,
                     ),
                   ),
                 )
