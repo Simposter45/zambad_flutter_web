@@ -39,6 +39,28 @@ mixin _$PosStore on _PosStore, Store {
   }
 
   @override
+  void editPos(ManagePosModel editedPos, ManagePosModel existingPos) {
+    final _$actionInfo =
+        _$_PosStoreActionController.startAction(name: '_PosStore.editPos');
+    try {
+      return super.editPos(editedPos, existingPos);
+    } finally {
+      _$_PosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void deletePos(ManagePosModel posModel) {
+    final _$actionInfo =
+        _$_PosStoreActionController.startAction(name: '_PosStore.deletePos');
+    try {
+      return super.deletePos(posModel);
+    } finally {
+      _$_PosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 posList: ${posList}

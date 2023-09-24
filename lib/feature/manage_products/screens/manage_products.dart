@@ -9,6 +9,8 @@ import '../../home/widgets/side_bar.dart';
 import '../../manage_categories/models/manage_categories_model.dart';
 import '../models/manage_product_model.dart';
 import '../widgets/filter_dialog.dart';
+import 'add_product.dart';
+import 'view_product.dart';
 
 class ManageProducts extends StatelessWidget {
   ManageProducts({Key? key}) : super(key: key);
@@ -40,7 +42,10 @@ class ManageProducts extends StatelessWidget {
           ActionButton(
             icon: Icons.add,
             title: ' Add Product',
-            action: () {},
+            action: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AddProduct()));
+            },
           )
         ],
       ),
@@ -53,7 +58,6 @@ class ManageProducts extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: SearchBar(
@@ -138,10 +142,6 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        // image: DecorationImage(
-        //   fit: BoxFit.cover,
-        //   image: AssetImage(productModel.image),
-        // ),
         border: Border.all(
           color: AppColors.deepGold,
         ),
@@ -153,29 +153,7 @@ class ProductCard extends StatelessWidget {
           Expanded(
               child: Image.asset(
             productModel.image,
-          )
-
-              // DecoratedBox(
-              //   decoration: BoxDecoration(
-              //       // border: Border.all(
-              //       //   color: AppColors.deepGold,
-              //       //   // top: BorderSide(
-              //       //   //   color: AppColors.deepGold,
-              //       //   // ),
-              //       //   // left: BorderSide(
-              //       //   //   color: Color.fromRGBO(167, 122, 19, 1),
-              //       //   // ),
-              //       //   // right: BorderSide(
-              //       //   //   color: AppColors.deepGold,
-              //       //   // ),
-              //       // ),
-              //       borderRadius: BorderRadius.circular(7),
-              //       image: DecorationImage(
-              //         fit: BoxFit.cover,
-              //         image: AssetImage(productModel.image),
-              //       )),
-              // ),
-              ),
+          )),
           const Divider(color: AppColors.deepGold),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -215,7 +193,17 @@ class ProductCard extends StatelessWidget {
                 backgroundColor: MaterialStatePropertyAll(AppColors.lightGold),
                 side: MaterialStatePropertyAll(
                     BorderSide(color: AppColors.deepGold))),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ViewProduct(
+                      productModel: productModel,
+                    );
+                  },
+                ),
+              );
+            },
             child: const Text(
               'View Product',
               style: AppTextStyles.sairaGoldMedium,

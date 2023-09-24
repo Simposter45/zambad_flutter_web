@@ -27,7 +27,7 @@ class AuthProvider extends ChangeNotifier {
           .then((_) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreenProviders()),
         );
       });
     } on FirebaseAuthException catch (e) {

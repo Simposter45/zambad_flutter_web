@@ -11,6 +11,7 @@ import '../../_global/widgets/appbar_widget.dart';
 import '../../home/widgets/side_bar.dart';
 import '../model/order_details_model.dart';
 import '../store/order_store.dart';
+import 'add_order.dart';
 import 'order_details.dart';
 
 class ManageOrders extends StatefulWidget {
@@ -58,7 +59,10 @@ class _ManageOrdersState extends State<ManageOrders> {
           ActionButton(
             icon: Icons.add,
             title: ' Add Orders',
-            action: () {},
+            action: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AddOrders()));
+            },
           ),
         ],
       ),

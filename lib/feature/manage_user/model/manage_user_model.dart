@@ -1,8 +1,7 @@
 class ManageUserModel {
+  ManageUserModel({required this.name, required this.salesId});
   String name;
   String salesId;
-
-  ManageUserModel({required this.name, required this.salesId});
 }
 
 final List<ManageUserModel> userslist = [

@@ -14,7 +14,9 @@ import '../../manage_pos/screens/manage_pos.dart';
 import '../../manage_pos/store/pos_store.dart';
 import '../../manage_products/screens/manage_products.dart';
 import '../../manage_states/screens/manage_state.dart';
+import '../../manage_user/model/manage_user_model.dart';
 import '../../manage_user/screens/manage_users.dart';
+import '../../manage_user/store/user_store.dart';
 import '../store/navigation_store.dart';
 import '../widgets/side_bar.dart';
 import 'views/dashboard.dart';
@@ -32,6 +34,9 @@ class HomeScreenProviders extends StatelessWidget {
         ),
         Provider<PosStore>(
           create: (_) => PosStore(posList: posList),
+        ),
+        Provider<UserStore>(
+          create: (_) => UserStore(userList: userslist),
         ),
       ],
       child: const HomeScreen(),
@@ -60,7 +65,7 @@ class HomeScreen extends StatelessWidget {
           break;
 
         case ScreenType.ManageOrders:
-          currentView = ManageOrders();
+          currentView = const ManageOrders();
 
           break;
 
@@ -73,7 +78,7 @@ class HomeScreen extends StatelessWidget {
           break;
 
         case ScreenType.ManageStates:
-          currentView = ManageState();
+          currentView = const ManageState();
           break;
 
         case ScreenType.ManageUsers:
@@ -81,11 +86,11 @@ class HomeScreen extends StatelessWidget {
           break;
 
         case ScreenType.ManageGoldPurity:
-          currentView = ManageGoldPurity();
+          currentView = const ManageGoldPurity();
           break;
 
         case ScreenType.ManageColor:
-          currentView = ManageColor();
+          currentView = const ManageColor();
           break;
       }
 

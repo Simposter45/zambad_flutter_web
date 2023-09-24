@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import '../model/manage_pos_model.dart';
-import '../screens/manage_pos.dart';
 
 part 'pos_store.g.dart';
 

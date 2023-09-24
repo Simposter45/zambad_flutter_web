@@ -7,6 +7,8 @@ import '../../../_global/widgets/action_button.dart';
 import '../../../_global/widgets/appbar_widget.dart';
 import '../../../manage_orders/model/order_details_model.dart';
 import '../../../manage_orders/screens/order_details.dart';
+import '../../../manage_pos/model/manage_pos_model.dart';
+import '../../../manage_products/models/manage_product_model.dart';
 import '../../widgets/header_widget.dart';
 import '../../widgets/side_bar.dart';
 
@@ -50,20 +52,20 @@ class Dashboard extends StatelessWidget {
                   primary: false,
                   child: Row(
                     children: [
-                      const HeaderWidget(
+                      HeaderWidget(
                         text: 'Total Number of Orders',
-                        amount: 0,
+                        amount: orderList.length,
                         icon: Icons.bar_chart_rounded,
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      const HeaderWidget(
+                      HeaderWidget(
                           text: 'Total No. of Products',
-                          amount: 0,
+                          amount: productsList.length,
                           icon: Icons.shopping_bag_outlined),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      const HeaderWidget(
+                      HeaderWidget(
                           text: 'Total No. of POS',
-                          amount: 0,
+                          amount: posList.length,
                           icon: Icons.storefront_rounded)
                     ],
                   ),

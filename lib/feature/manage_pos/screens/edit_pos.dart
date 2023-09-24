@@ -90,97 +90,104 @@ class _EditPosState extends State<EditPos> {
                         )
                       : null,
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 5),
-                  const Text('Basic Info', style: AppTextStyles.nunitoSansBold),
-                  const SizedBox(height: 5),
-                  const Text('Pos Name', style: AppTextStyles.nunitoSansNormal),
-                  const SizedBox(height: 5),
-                  TextField(
-                    controller: nameController,
-                    autofocus: true,
-                    decoration: InputDecoration(
-                      hintText: 'Enter name',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: AppColors.borderGrey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: AppColors.borderGrey),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  const Text('Description (Optional)',
-                      style: AppTextStyles.nunitoSansNormal),
-                  const SizedBox(height: 5),
-                  TextField(
-                    controller: descController,
-                    autofocus: true,
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Description',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: AppColors.borderGrey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: AppColors.borderGrey),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Align(
-                    child: TextButton(
-                        style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.deepGold),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 5),
+                    const Text('Basic Info',
+                        style: AppTextStyles.nunitoSansBold),
+                    const SizedBox(height: 5),
+                    const Text('Pos Name',
+                        style: AppTextStyles.nunitoSansNormal),
+                    const SizedBox(height: 5),
+                    TextField(
+                      controller: nameController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: 'Enter name',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(7),
+                          borderSide:
+                              const BorderSide(color: AppColors.borderGrey),
                         ),
-                        onPressed: () {
-                          if (widget.existingPos != null) {
-                            final editedPos = ManagePosModel(
-                              posName: nameController.text,
-                              date: DateTime.now().toString().substring(0, 11),
-                              description: descController.text,
-                            );
-                            if (editedPos.posName.isNotEmpty) {
-                              posStore.editPos(editedPos, widget.existingPos!);
-                            }
-                          } else {
-                            final newPos = ManagePosModel(
-                              posName: nameController.text,
-                              date: DateTime.now().toString().substring(0, 11),
-                              description: descController.text,
-                            );
-
-                            if (newPos.posName.isNotEmpty) {
-                              posStore.addPos(newPos);
-                            }
-                          }
-
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            widget.buttonName,
-                            style: AppTextStyles.nunitoSansNormal
-                                .copyWith(color: Colors.white),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(7),
+                          borderSide:
+                              const BorderSide(color: AppColors.borderGrey),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    const Text('Description (Optional)',
+                        style: AppTextStyles.nunitoSansNormal),
+                    const SizedBox(height: 5),
+                    TextField(
+                      controller: descController,
+                      autofocus: true,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Description',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(7),
+                          borderSide:
+                              const BorderSide(color: AppColors.borderGrey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(7),
+                          borderSide:
+                              const BorderSide(color: AppColors.borderGrey),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Align(
+                      child: TextButton(
+                          style: const ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(AppColors.deepGold),
                           ),
-                        )),
-                  )
-                ],
+                          onPressed: () {
+                            if (widget.existingPos != null) {
+                              final editedPos = ManagePosModel(
+                                posName: nameController.text,
+                                date:
+                                    DateTime.now().toString().substring(0, 11),
+                                description: descController.text,
+                              );
+                              if (editedPos.posName.isNotEmpty) {
+                                posStore.editPos(
+                                    editedPos, widget.existingPos!);
+                              }
+                            } else {
+                              final newPos = ManagePosModel(
+                                posName: nameController.text,
+                                date:
+                                    DateTime.now().toString().substring(0, 11),
+                                description: descController.text,
+                              );
+
+                              if (newPos.posName.isNotEmpty) {
+                                posStore.addPos(newPos);
+                              }
+                            }
+
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              widget.buttonName,
+                              style: AppTextStyles.nunitoSansNormal
+                                  .copyWith(color: Colors.white),
+                            ),
+                          )),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
